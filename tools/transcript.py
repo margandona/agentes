@@ -143,7 +143,7 @@ def pick_subtitle(directory: Path, video_id: str, langs: list[str]) -> Path | No
 
 
 def download(url: str, langs: list[str], slug_override: str | None) -> int:
-    probe_opts = {"quiet": True, "no_warnings": True, "skip_download": True}
+    probe_opts = {"quiet": True, "no_warnings": True, "skip_download": True, "extractor_args": {"youtube": {"player_client": ["android", "web"]}}}
     try:
         with yt_dlp.YoutubeDL(probe_opts) as ydl:
             info = ydl.extract_info(url, download=False)
@@ -192,6 +192,7 @@ def download(url: str, langs: list[str], slug_override: str | None) -> int:
         "subtitleslangs": langs,
         "subtitlesformat": "vtt",
         "ignoreerrors": True,
+        "extractor_args": {"youtube": {"player_client": ["android", "web"]}},
         "outtmpl": str(directory / f"{video_id}.%(ext)s"),
     }
     try:

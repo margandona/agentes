@@ -39,6 +39,12 @@ Esto es lo que el lab ya hace parcialmente con `webapp-testing`, pero el video l
 - Playwright CLI ≈ `webapp-testing` (skill local).
 - Guías de diseño ≈ `code-review` (skill local, aunque enfocado en código, no en UI).
 
-## Regla del lab
+## Herramientas adicionales (video gvaBdZN44L0)
 
-Un agente que construye UI debe verificar su trabajo en el navegador antes de darlo por terminado. Sin capturas ni interacción, no hay evidencia de que funcione.
+| Herramienta | Qué hace | Equivalente en el lab |
+|---|---|---|
+| **UI UX Pro Max** (skill) | Criterio de diseño para Claude Code | — |
+| **21st.dev** | Componentes UI listos para copiar | shadcn/ui |
+| **Framer Motion** | Animaciones | CSS animations |
+
+Patrón: el agente no inventa componentes ni animaciones; los toma de una librería y los ensambla con buenas instrucciones. Tiempo reportado: ~10 minutos para una web vendible.

@@ -75,6 +75,23 @@ Sin capturas ni interacción, no hay evidencia de que funcione. Aplica a interfa
 
 Principio tomado de `FNQ8WJa786M` y ya implementado parcialmente en `webapp-testing`.
 
+## Conservar el valor
+
+Antes de automatizar un proceso, entender **por qué se hace**. Si automatizás sin conservar el valor para el cliente, el negocio y el empleado, optimizaste algo que no debía existir.
+
+Principio tomado de `a0uAGOPiQOU` [00:22]:
+
+> "Si vas a automatizar algo, querés conservar el valor de por qué se hace para el cliente, para el negocio y para el empleado."
+
+Aplicación práctica:
+
+1. Mapear el proceso actual (pasos, software, personas).
+2. Para cada paso, preguntar: ¿qué valor genera esto?
+3. Automatizar solo los pasos que no generan valor único.
+4. Verificar que el resultado final preserve el valor original.
+
+Si no podés responder "por qué se hace", no automatices: primero entendé.
+
 ## Checklist de cierre
 
 - [ ] La ficha tiene timestamps
