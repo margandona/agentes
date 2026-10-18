@@ -13,9 +13,11 @@ Objetivo: correr modelos en esta máquina para (a) no depender de la nube, (b) e
 | Disco libre | ~469 GB |
 | Ollama | 0.40.4, con `qwen2.5-coder:7b` y `:14b` descargados |
 
-**Lectura rápida del hardware:** 6 GB de VRAM es el límite duro. Entran modelos de 7B-8B en Q4 (4,5-5 GB) con contexto moderado; un 14B Q4 (9 GB) desborda a RAM y pierde velocidad. La RAM de 24 GB permite correr 14B en CPU+GPU híbrido, pero a ~1/4 de la velocidad.
+**Lectura rápida del hardware (corregida con mediciones):** 6 GB de VRAM es el límite duro, pero **ni un 7B en Q4 entra completo**: el overhead de Windows deja ~16% de las capas en CPU y el techo es ~22 tok/s. Los modelos ≤3B sí entran 100% en GPU y son 4-7x más rápidos. Un 14B Q4 (9 GB) desborda a RAM y queda inutilizable para programar.
 
-**Recomendación para empezar:** usar `qwen2.5-coder:7b` para coding, y bajar un 3B-4B (ej. `qwen3:4b`) para tareas rápidas y contexto largo.
+**Recomendación para empezar:** `qwen2.5-coder:7b-instruct-q4_K_S` para calidad, `qwen2.5-coder:3b` para velocidad (convive con el autocompletado) y `qwen2.5-coder:1.5b` para Tab. Números en `local-ai/benchmarks.md`.
+
+**Programar en VS Code:** `local-ai/vscode-local.md` — Continue + Ollama, con la config lista en `local-ai/continue-config.yaml`.
 
 Herramientas evaluadas (video, imagen, audio): `local-ai/herramientas/INDEX.md`.
 
@@ -57,7 +59,7 @@ LM Studio: descargar de https://lmstudio.ai y usar el servidor local en `http://
 
 | VRAM | Modelos cómodos | Contexto práctico |
 |---|---|---|
-| 6-8 GB | 3B-8B | 8k-16k |
+| 6-8 GB | 3B-4B (7B parcial en CPU) | 4k-8k |
 | 12 GB | 8B-14B | 16k-32k |
 | 16 GB | 14B | 32k |
 | 24 GB | 27B-32B | 32k-64k |
@@ -105,8 +107,9 @@ Para Ollama, OpenCode trae proveedor nativo: `ollama/<modelo>`.
 ## Pendientes
 
 - [x] Instalar Ollama
-- [ ] Correr benchmark base (7b vs 14b vs un 3-4B)
-- [ ] Conectar OpenCode a un modelo local
+- [x] Correr benchmark base (7B vs 3B vs 1.5B) → `local-ai/benchmarks.md`
+- [x] Conectar OpenCode/VS Code a un modelo local → `local-ai/vscode-local.md`
+- [ ] Correr las 5 tareas de calidad del benchmark (tool calling incluido)
 - [ ] Evaluar RAG local con `nomic-embed-text`
 - [ ] Instalar ffmpeg (lo necesita whisper para transcribir videos sin subtítulos)
 

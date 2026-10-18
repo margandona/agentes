@@ -22,3 +22,11 @@ Formato: fecha, decisión, motivo, alternativa descartada.
 **Tope de gasto si se ejecuta:** $10/mes, con prueba inicial de $0,09.
 **Alternativa descartada:** instalar ComfyUI ya. Mucho esfuerzo para calidad 480p.
 **Revisar cuando:** haya objetivo concreto de publicación, o aparezca una GPU con ≥16 GB.
+
+## 2026-10-18 — IA local en VS Code: 7B Q4_K_S + 3B + 1.5B
+
+**Decisión:** usar Continue + Ollama en VS Code con tres modelos: `qwen2.5-coder:7b-instruct-q4_K_S` para chat/edición (calidad), `qwen2.5-coder:3b` para chat rápido y `qwen2.5-coder:1.5b` para autocompletado. Config en `local-ai/continue-config.yaml`.
+**Motivo:** medido en `local-ai/benchmarks.md` — 22 / 81 / 142 tok/s respectivamente. Ningún 7B entra completo en 6 GB (16% de las capas caen a CPU); los ≤3B sí entran 100% en GPU.
+**Alternativa descartada:** `qwen2.5-coder:14b` (9 GB, corre en RAM) y autocompletado con el 7B (~2,5 s por sugerencia).
+**Costo:** 0. El único gasto es el disco (~11 GB de modelos).
+**Revisar cuando:** se prueben las 5 tareas de calidad, o si el swap 7B ↔ 1.5B resulta molesto en el uso diario (en ese caso el 3B pasa a ser el default de chat).

@@ -1,0 +1,56 @@
+# Config de Continue.dev para programar en VS Code con modelos locales (Ollama).
+# Esta es la copia de referencia del repo.
+# La que usa VS Code vive en %USERPROFILE%\.continue\config.yaml
+# Guía y números medidos: local-ai/vscode-local.md
+
+name: Local RTX 4050 (6 GB)
+version: 1.0.0
+schema: v1
+
+models:
+  # Calidad máxima que da esta máquina. 22 tok/s, 16% en CPU (no entra entero en VRAM).
+  # Carga en frío: 12 s. Contexto 4096 medido; con 8192 baja la velocidad.
+  - name: Qwen2.5 Coder 7B (calidad)
+    provider: ollama
+    model: qwen2.5-coder:7b-instruct-q4_K_S
+    apiBase: http://localhost:11434
+    roles:
+      - chat
+      - edit
+    defaultCompletionOptions:
+      contextLength: 4096
+      maxTokens: 2048
+      temperature: 0.2
+
+  # 100% GPU, 81 tok/s. Convive con el autocompletado sin descargar nada.
+  # Elegilo si alternás mucho chat y Tab.
+  - name: Qwen2.5 Coder 3B (rápido)
+    provider: ollama
+    model: qwen2.5-coder:3b
+    apiBase: http://localhost:11434
+    roles:
+      - chat
+    defaultCompletionOptions:
+      contextLength: 8192
+      maxTokens: 2048
+      temperature: 0.2
+
+  # Autocompletado con Tab. 142 tok/s, 1,2 GB: tiene que responder en <1 s.
+  - name: Qwen2.5 Coder 1.5B (autocomplete)
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    apiBase: http://localhost:11434
+    roles:
+      - autocomplete
+    defaultCompletionOptions:
+      contextLength: 2048
+      maxTokens: 128
+      temperature: 0.1
+
+context:
+  - provider: code
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase

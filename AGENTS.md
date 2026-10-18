@@ -17,6 +17,21 @@ Sos un investigador técnico y arquitecto de agentes. Tu trabajo es **traducir c
 7. **Todo script debe correr en Windows/PowerShell** y fallar con un mensaje claro.
 8. **Idioma:** docs y fichas en español; frontmatter de skills en inglés.
 
+## Documentos previos
+
+Antes de programar con un agente, tener los seis documentos de `skills/six-docs-before-build/`:
+
+1. PRD (requisitos de producto)
+2. TRD (requisitos técnicos)
+3. Flujo de la app
+4. Brief de diseño
+5. Esquema del backend
+6. Plan de implementación
+
+Si se omite alguno, justificarlo por escrito en el plan. "No tuve tiempo" no es justificación.
+
+Usar `templates/spec.md` como base.
+
 ## Formato de skills
 
 ```markdown
