@@ -23,6 +23,8 @@ Herramientas evaluadas (video, imagen, audio): `local-ai/herramientas/INDEX.md`.
 
 **Generar video con IA:** `local-ai/generar-video.md` — las 3 rutas (local gratis, API por segundo, GPU alquilada) con precios comparados.
 
+**Programar con IA local en VS Code:** `local-ai/vscode-local.md` — guía medida para Ollama + Continue (7B/3B/1.5B), con `continue-config.yaml` listo para copiar.
+
 ## Decisión rápida
 
 | Querés... | Usá |
