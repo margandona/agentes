@@ -2,6 +2,21 @@
 
 Objetivo: correr modelos en esta máquina para (a) no depender de la nube, (b) entender qué se puede hacer con hardware real, (c) servir de backend a agentes del lab.
 
+## Máquina actual (verificado 2026-10-18)
+
+| Pieza | Valor |
+|---|---|
+| Modelo | HP Victus 15-fb2xxx |
+| CPU | AMD Ryzen 7 8845HS (16 hilos) |
+| RAM | 24 GB (23,3 usables) |
+| GPU | NVIDIA RTX 4050 Laptop, **6 GB VRAM** + Radeon 780M integrada |
+| Disco libre | ~469 GB |
+| Ollama | 0.40.4, con `qwen2.5-coder:7b` y `:14b` descargados |
+
+**Lectura rápida del hardware:** 6 GB de VRAM es el límite duro. Entran modelos de 7B-8B en Q4 (4,5-5 GB) con contexto moderado; un 14B Q4 (9 GB) desborda a RAM y pierde velocidad. La RAM de 24 GB permite correr 14B en CPU+GPU híbrido, pero a ~1/4 de la velocidad.
+
+**Recomendación para empezar:** usar `qwen2.5-coder:7b` para coding, y bajar un 3B-4B (ej. `qwen3:4b`) para tareas rápidas y contexto largo.
+
 ## Decisión rápida
 
 | Querés... | Usá |
@@ -85,7 +100,10 @@ Para Ollama, OpenCode trae proveedor nativo: `ollama/<modelo>`.
 
 ## Pendientes
 
-- [ ] Instalar Ollama
-- [ ] Correr benchmark base (3 modelos)
+- [x] Instalar Ollama
+- [ ] Correr benchmark base (7b vs 14b vs un 3-4B)
 - [ ] Conectar OpenCode a un modelo local
 - [ ] Evaluar RAG local con `nomic-embed-text`
+- [ ] Instalar ffmpeg (lo necesita whisper para transcribir videos sin subtítulos)
+
+Plan asociado: `plans/ia-local-rtx-4050.md`.

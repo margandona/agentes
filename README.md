@@ -64,7 +64,7 @@ python tools/transcript.py "<URL>"
 
 - [x] Repo base + metodología
 - [x] Skill `agent-reach` instalada + yt-dlp
+- [x] Ollama instalado (falta benchmark)
 - [ ] Primer video procesado
 - [ ] Primer skill propio
 - [ ] Primer agente corriendo
-- [ ] IA local instalada y benchmarkeada

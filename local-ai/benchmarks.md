@@ -1,6 +1,6 @@
 # Benchmarks de modelos locales
 
-Máquina: _(completar: CPU, RAM, GPU, VRAM, OS)_
+Máquina: HP Victus 15 · Ryzen 7 8845HS · 24 GB RAM · RTX 4050 Laptop 6 GB VRAM · Windows 11
 
 | Fecha | Modelo | Cuantización | VRAM usada | tok/s | TTFT | Notas |
 |---|---|---|---|---|---|---|
