@@ -1,0 +1,3 @@
+[00:00] Anthropic no le dio ojos a Claude. Este repositorio lo arregla. Le da a Claude la capacidad de leer internet en vivo y lleva por las 71.000 estrellas. Esto es lo que resuelve. Muchísimas plataformas tienen su información encerrada detrás de un muro de registro, de un límite de peticiones o de una API de 500 dólares. Con este repositorio entras a 17 de las plataformas más grandes y todas ellas gratis. Puedes sacar contactos de LinkedIn, analizar vídeos de YouTube, revisar publicaciones virales en X o ver qué es lo que está funcionando en Instagram. El repositorio lo tienes en nuestra bóveda. Ve al link de nuestra
+
+[00:30] bio y encuentra el link.

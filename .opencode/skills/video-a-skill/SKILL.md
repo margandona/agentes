@@ -27,6 +27,8 @@ Convierte un video de YouTube en artefactos verificables dentro de `agent-lab`.
    ```
    Verificar que existan `videos/<slug>/metadata.json` y `transcript.txt`.
 
+   **Alternativa con Gemini (pieza 2 del video RDWPjBqRrro):** Gemini entiende videos de YouTube de fábrica, sin descargar ni transcribir. Si se usa, el flujo cambia: en lugar de `transcript.py`, se consulta la API de Gemini con el link del video y se obtiene un resumen estructurado. Ver `plans/transcripcion-con-gemini.md`. Por ahora el flujo por defecto sigue siendo yt-dlp + Whisper local.
+
 2. **Lectura**
    Leer la transcripción completa. Si es muy larga, leer por bloques y anotar timestamps.
 

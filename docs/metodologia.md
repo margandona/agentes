@@ -46,6 +46,35 @@ Si de un video de 60 minutos salen más de 3 skills, estás transcribiendo, no s
 | Copiar el stack del video sin medir | Dependencias que no vas a usar |
 | "Según el video, X es mejor" | Falta el benchmark propio |
 
+## Chatbot vs agente
+
+Un chatbot habla. Un agente actúa.
+
+La diferencia práctica:
+
+- **Chatbot**: recibe un mensaje, genera una respuesta. Cada mensaje es una conversación nueva.
+- **Agente**: recibe un mensaje, consulta memoria, consulta conocimiento del negocio, ejecuta herramientas, y responde. Recuerda y actúa.
+
+Para convertir un chatbot en agente se necesitan tres cosas (del video `vlKWMfbY9BA`):
+
+1. **Memoria**: guardar el historial reciente y devolverlo al modelo con cada mensaje.
+2. **Conocimiento**: servicios, precios, horarios, FAQ, reglas. Así no se inventa.
+3. **Herramientas**: calendario, base de datos, APIs. Así actúa, no solo conversa.
+
+Si falta la memoria, cada mensaje es un desconocido. Si faltan las herramientas, solo conversa. Con las dos, tenés algo que trabaja por vos.
+
+## Verificación propia del agente
+
+Un agente que construye UI (o cualquier artefacto verificable) debe comprobar su trabajo antes de darlo por terminado:
+
+```
+construye → abre → interactúa → captura → comprueba
+```
+
+Sin capturas ni interacción, no hay evidencia de que funcione. Aplica a interfaces, a código que genera archivos y a cualquier salida observable.
+
+Principio tomado de `FNQ8WJa786M` y ya implementado parcialmente en `webapp-testing`.
+
 ## Checklist de cierre
 
 - [ ] La ficha tiene timestamps
