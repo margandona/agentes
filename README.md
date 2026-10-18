@@ -4,6 +4,21 @@ Laboratorio personal para convertir videos de YouTube (y otras fuentes) en **ski
 
 La regla del repo: **nada entra sin fuente y sin ficha**. Cada video deja un rastro: metadatos → transcripción → ficha → skill y/o plan → índice.
 
+## Dos pistas, un solo repo
+
+| Pista | Dónde vive | Qué produce |
+|---|---|---|
+| **Agentes** | `videos/`, `skills/`, `plans/`, `agents/` | procedimientos y planes para construir agentes |
+| **IA local** | `local-ai/` | evaluaciones de modelos/herramientas, benchmarks, hardware |
+
+Regla para decidir:
+
+- Si el video enseña **un procedimiento que un agente puede repetir** → pista agentes.
+- Si el video muestra **una herramienta o modelo para correr en la máquina** → pista IA local.
+- Si es ambas, la ficha va en `videos/` y se parte: el procedimiento a `skills/`, la herramienta a `local-ai/herramientas/`.
+
+Un repo y no dos porque comparten la misma ingesta (transcripción + ficha) y los mismos índices. Se separa recién si la pista de IA local crece al punto de tener su propio pipeline. Decisión registrada en `docs/decisiones.md`.
+
 ## Estructura
 
 ```
@@ -65,6 +80,6 @@ python tools/transcript.py "<URL>"
 - [x] Repo base + metodología
 - [x] Skill `agent-reach` instalada + yt-dlp
 - [x] Ollama instalado (falta benchmark)
-- [ ] Primer video procesado
+- [x] Primer video procesado (LTX Desktop, no-go por VRAM)
 - [ ] Primer skill propio
 - [ ] Primer agente corriendo

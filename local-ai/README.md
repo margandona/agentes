@@ -17,6 +17,8 @@ Objetivo: correr modelos en esta máquina para (a) no depender de la nube, (b) e
 
 **Recomendación para empezar:** usar `qwen2.5-coder:7b` para coding, y bajar un 3B-4B (ej. `qwen3:4b`) para tareas rápidas y contexto largo.
 
+Herramientas evaluadas (video, imagen, audio): `local-ai/herramientas/INDEX.md`.
+
 ## Decisión rápida
 
 | Querés... | Usá |

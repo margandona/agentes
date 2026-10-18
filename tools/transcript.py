@@ -67,14 +67,23 @@ def clean_caption_line(line: str) -> str:
 
 def parse_vtt(path: Path) -> list[tuple[float, str]]:
     """Devuelve [(segundos, texto)] sin duplicados de captions rodantes."""
+    content = path.read_text(encoding="utf-8", errors="replace")
+    # YouTube auto-captions usan cues de dos líneas: la primera repite el
+    # contexto anterior y la segunda trae las palabras nuevas. Los subtítulos
+    # manuales no tienen tags <c> ni <00:..>.
+    is_auto = "<c>" in content or "<00:" in content
+
     cues: list[tuple[float, str]] = []
     current_time = 0.0
     buffer: list[str] = []
 
     def flush() -> None:
         nonlocal buffer
-        text = " ".join(x for x in buffer if x)
+        lines = [x for x in buffer if x]
         buffer = []
+        if is_auto and len(lines) > 1:
+            lines = lines[-1:]
+        text = " ".join(lines)
         if not text:
             return
         if cues and (text == cues[-1][1] or cues[-1][1].endswith(text)):
@@ -84,7 +93,7 @@ def parse_vtt(path: Path) -> list[tuple[float, str]]:
             return
         cues.append((current_time, text))
 
-    for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
+    for raw in content.splitlines():
         line = raw.strip("\ufeff")
         if "-->" in line:
             flush()
@@ -182,6 +191,7 @@ def download(url: str, langs: list[str], slug_override: str | None) -> int:
         "writeautomaticsub": True,
         "subtitleslangs": langs,
         "subtitlesformat": "vtt",
+        "ignoreerrors": True,
         "outtmpl": str(directory / f"{video_id}.%(ext)s"),
     }
     try:
