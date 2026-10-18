@@ -1,0 +1,4 @@
+[00:00] (transcripción de ejemplo)
+[03:12] El loop mínimo es plan, actuar, verificar, corregir.
+[11:40] Las tools tienen que devolver errores accionables.
+[25:03] Para proyectos chicos, la memoria en archivos alcanza.

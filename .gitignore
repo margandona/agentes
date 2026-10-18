@@ -1,0 +1,30 @@
+# Temporales
+*.tmp
+*.log
+tmp/
+temp/
+
+# Videos y audios (los subtítulos sí se versionan)
+*.mp4
+*.mkv
+*.webm
+*.mp3
+*.m4a
+
+# Entornos
+.venv/
+venv/
+__pycache__/
+node_modules/
+
+# Secretos
+.env
+.env.*
+secrets/
+*.key
+cookies.txt
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

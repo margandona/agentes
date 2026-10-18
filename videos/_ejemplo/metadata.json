@@ -1,0 +1,9 @@
+{
+  "id": "XXXXXXXXXXX",
+  "title": "Cómo construí un agente de investigación",
+  "channel": "Ejemplo",
+  "upload_date": "20260101",
+  "duration": 2530,
+  "webpage_url": "https://youtube.com/watch?v=XXXX",
+  "note": "Archivo de ejemplo. Los reales los genera tools/transcript.py"
+}
