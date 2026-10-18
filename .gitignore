@@ -10,6 +10,7 @@ temp/
 *.webm
 *.mp3
 *.m4a
+media/
 
 # Entornos
 .venv/

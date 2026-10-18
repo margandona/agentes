@@ -229,9 +229,190 @@ Eso te da generación local ilimitada durante 8 horas. Si hacés 20 clips de 5s,
 
 ## Mi recomendación concreta
 
-1. **Hoy:** Ruta 2 con **2.3 Fast a 720p**. Un clip de prueba de 3s cuesta **$0,09**. Si el resultado te sirve, escalás a 2.5 Fast solo para el clip final.
-2. **Este mes:** si generás más de 30 clips, pasá a **Ruta 3** con 3090/4090 y volumen de 100 GB (~$8/mes).
-3. **Ruta 1:** solo si el objetivo es aprender. No la elijas para producir: en 6 GB vas a esperar 10 minutos por un clip de 480p que no se ve como el del video.
+**Ruta 2, con tope de gasto de $10/mes.** Es la única que te da calidad publicable sin comprar hardware y sin administrar servidores. Las otras dos quedan como plan B:
+
+- **Ruta 1** solo si el objetivo es aprender. No la elijas para producir: en 6 GB vas a esperar 10 minutos por un clip de 480p que no se ve como el del video.
+- **Ruta 3** solo si superás los 30 clips al mes de forma sostenida. Antes de eso, el overhead de configurar el pod te cuesta más que los $5 que ahorrás.
+
+### Por qué no las otras ahora
+
+| Ruta | Por qué no hoy |
+|---|---|
+| ComfyUI local | 6 GB VRAM + modelos 2B = calidad baja y 10 min por clip. Mucho esfuerzo para un resultado que no vas a publicar. |
+| GPU alquilada | $8/mes fijos (storage + horas) contra $3-9 variables de la API, con más setup y más cosas que se pueden romper. Recién conviene con volumen. |
+
+### Presupuesto sugerido
+
+| Concepto | Tope |
+|---|---|
+| Prueba inicial | $1 (10 clips de 3s en 2.3 Fast) |
+| Operación mensual | $10 (≈ 20-60 clips según modelo) |
+| Regla | si un clip no quedó bien en 3 intentos, se cambia el prompt, no se sigue pagando |
+
+---
+
+## Cómo usarlo bien
+
+Generar video no es "escribir y ver qué sale". Es un pipeline con intentos, recortes y montaje.
+
+### 1. Fórmula de prompt
+
+```
+[sujeto] + [acción lenta] + [entorno] + [cámara] + [luz] + [estilo]
+```
+
+Ejemplo:
+
+> *A ceramic coffee cup on a wooden table, steam rising slowly, morning light from the left, slow dolly-in, shallow depth of field, cinematic, muted colors*
+
+Traducción de la lógica, no del texto:
+
+- **Sujeto:** uno solo. Dos sujetos = el modelo pierde uno.
+- **Acción lenta:** "steam rising", "hair moving", "waves rolling". Los movimientos rápidos se rompen.
+- **Cámara:** "slow dolly-in", "static shot", "handheld". Sin cámara, el modelo inventa.
+- **Luz:** "morning light", "neon", "softbox". Define el 50% del look.
+- **Estilo:** "cinematic", "documentary", "product ad". Corto y concreto.
+
+Escribí el prompt **en inglés** salvo que el modelo responda mejor en español; en ese caso, compará dos clips con el mismo contenido y elegí.
+
+### 2. Reglas de duración y formato
+
+| Plataforma | Formato | Duración por clip |
+|---|---|---|
+| Reels / TikTok / Shorts | 9:16 | 3-5 s |
+| YouTube | 16:9 | 5-10 s |
+| Feed | 1:1 o 4:5 | 3-5 s |
+
+Un video de 20 segundos no se genera de una: se generan **4 clips de 5s** y se montan. Es más barato y más controlable.
+
+### 3. Lo que rompe los modelos
+
+- Manos en primer plano y dedos.
+- Texto legible (carteles, logos, pantallas).
+- Multitudes y caras múltiples.
+- Movimientos rápidos o cambios de escena dentro del clip.
+- Prompt con negaciones ("sin gente"): el modelo suele dibujar lo que negás. Describí lo que querés.
+
+### 4. Workflow de 5 pasos
+
+1. **Guion visual:** una línea por clip. Si no podés describirlo en una línea, son dos clips.
+2. **Primer intento barato:** 3s en **2.3 Fast** ($0,09). Nunca arranques en 2.5 Pro.
+3. **Evaluar:** ¿el movimiento sirve? ¿el encuadre sirve? Si el problema es el encuadre, cambiá el prompt; si es un detalle, seguí.
+4. **Retake:** rehacé solo el fragmento malo ($0,10/s), no el clip completo.
+5. **Final:** si el clip va a publicación, regeneralo en **2.5 Fast** a la resolución final. Si es b-roll interno, quedate con el barato.
+
+### 5. Consistencia entre clips
+
+El problema más caro: cinco clips que parecen de cinco videos distintos.
+
+- Fijá una **imagen de referencia** y usá **image-to-video** para todos los planos del mismo producto o personaje.
+- Repetí el mismo sufijo de estilo en todos los prompts (ej. *"cinematic, muted colors, 35mm"*).
+- Si el modelo expone **seed**, usá la misma y cambiá solo la acción.
+- Aceptá que la consistencia de personajes es el punto más débil: para UGC, usá una sola toma por plano y cortá.
+
+### 6. Audio y UGC
+
+- LTX hace **audio-to-video** (visuales que siguen una música), no lipsync.
+- Para una persona hablando: guion → TTS → lipsync (ej. InfiniteTalk, ~$0,25 por clip 720p) → b-roll con LTX.
+- Para música: generá el clip mudo y montá el audio en el editor. Más barato y más control.
+
+### 7. Costo real por clip publicado
+
+| Modelo | Intentos | Costo por clip final |
+|---|---|---|
+| 2.3 Fast 5s 720p | 3 | **$0,45** |
+| 2.5 Fast 5s 720p | 3 | **$1,35** |
+| 2.5 Fast 5s 1080p | 3 | **$1,95** |
+
+Presupuestá **3 intentos por clip**. Si tu tasa de acierto es menor, el problema es el prompt, no el modelo.
+
+### 8. Checklist antes de publicar
+
+- [ ] Formato correcto (9:16 / 16:9 / 1:1) y duración 3-10 s
+- [ ] Sin artefactos en manos, caras o texto
+- [ ] Movimiento coherente de principio a fin
+- [ ] Color y estilo iguales al resto de la serie
+- [ ] Audio con licencia o generado propio
+- [ ] Si es sintético y la plataforma lo pide, declararlo
+- [ ] Archivo final renombrado y guardado, no solo en el historial de la app
+
+---
+
+## Cómo implementarlo
+
+Cuatro fases. No pasar a la siguiente sin cerrar la anterior.
+
+### Fase 0 — Decisión (5 min, $0)
+
+- [ ] Confirmar Ruta 2 y tope de $10/mes
+- [ ] Registrar la decisión en `docs/decisiones.md`
+- [ ] Crear la carpeta `media/` para salidas (ignorada por git)
+
+**Criterio de salida:** la decisión está escrita y hay un lugar definido para los archivos.
+
+### Fase 1 — Prueba de realidad (30 min, ~$0,09)
+
+- [ ] Instalar LTX Desktop desde los releases
+- [ ] Crear API key en `console.ltx.video`
+- [ ] Generar **un** clip de 3s, 720p, 2.3 Fast
+- [ ] Compararlo contra el Short de referencia: ¿se banca verse en un teléfono?
+
+**Criterio de salida:** decisión binaria. Si el resultado es aceptable → Fase 2. Si no → el problema es el modelo o el prompt, no la ruta; revisar antes de gastar más.
+
+### Fase 2 — Plantillas (2 h, ~$2)
+
+- [ ] Definir 3 plantillas: producto, paisaje/ambiente, persona
+- [ ] Generar 9-12 clips de prueba (3-4 por plantilla)
+- [ ] Elegir la fórmula de prompt que mejor funciona y guardarla
+- [ ] Anotar tiempos, intentos y costo real en `local-ai/benchmarks.md`
+
+**Criterio de salida:** una plantilla produce un clip aceptable en ≤3 intentos.
+
+**Dónde guardar los prompts:** `local-ai/prompts-video.md` (se crea en esta fase), uno por plantilla, con el clip de ejemplo al lado.
+
+### Fase 3 — Operación (semanal, ~$5-10/mes)
+
+- [ ] Lote semanal de 5 clips: 1 guion, 5 prompts, 15 intentos máximo
+- [ ] Guardar cada pieza en `media/YYYY-MM-DD-slug/` con `prompt.md` y `ficha.md`
+- [ ] Publicar y anotar qué funcionó
+- [ ] Revisar el gasto real contra el tope
+
+**Criterio de salida:** 4 semanas seguidas con clips publicados dentro del presupuesto.
+
+### Fase 4 — Escala (solo si hace falta)
+
+Se activa si:
+
+- Generás **más de 30 clips al mes**, o
+- Necesitás lotes grandes de una vez, o
+- El gasto de API supera los $15/mes.
+
+Ahí sí: Runpod + volumen de 100 GB + ComfyUI. Costo esperado ~$8/mes por 8 horas de GPU.
+
+### Convención de archivos
+
+```
+media/
+└─ 2026-10-25-cafe-manana/
+   ├─ prompt.md      # prompt exacto, modelo, resolución, seed, costo
+   ├─ output.mp4     # ignorado por git
+   └─ ficha.md       # qué funcionó, qué no, veredicto
+```
+
+`media/` está en `.gitignore`: los videos no se versionan, pero el prompt y la ficha sí se pueden mover a `docs/` o `videos/` si la pieza enseña algo.
+
+### Métricas a medir
+
+| Métrica | Objetivo inicial |
+|---|---|
+| Intentos por clip aceptado | ≤3 |
+| Costo por clip aceptado | ≤$0,50 |
+| Tiempo prompt → clip | ≤15 min |
+| Tasa de clips publicados / generados | ≥1 de 3 |
+
+Si no se cumplen, no es un problema de herramienta: es de proceso.
+
+---
 
 ## Letra chica
 
