@@ -72,9 +72,14 @@ agent-lab/
 # estado del entorno
 powershell -File tools/doctor.ps1
 
+# panel visual de accesos
+start local-ai/dashboard.html
+
 # primer video
 python tools/transcript.py "<URL>"
 ```
+
+Mapa completo de servicios y puertos: `docs/acceso.md`.
 
 ## Estado
 

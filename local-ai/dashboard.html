@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agent-lab · dashboard local</title>
+<style>
+  :root { --bg:#0f1115; --card:#1a1d24; --line:#2a2f3a; --fg:#e6e8ec; --muted:#9aa3b2; --accent:#7c9cff; --ok:#3dd68c; --warn:#f5a623; --no:#ff6b6b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+  header { padding:24px 32px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; }
+  header h1 { margin:0; font-size:20px; }
+  header p { margin:4px 0 0; color:var(--muted); font-size:13px; }
+  main { padding:24px 32px; display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:8px; }
+  .card h2 { margin:0; font-size:16px; display:flex; align-items:center; gap:8px; }
+  .card p { margin:0; color:var(--muted); font-size:13px; line-height:1.5; }
+  .status { font-size:11px; padding:2px 8px; border-radius:999px; font-weight:600; }
+  .status.ok { background:rgba(61,214,140,.15); color:var(--ok); }
+  .status.warn { background:rgba(245,166,35,.15); color:var(--warn); }
+  .status.no { background:rgba(255,107,107,.15); color:var(--no); }
+  .links { margin-top:8px; display:flex; flex-wrap:wrap; gap:8px; }
+  .links a { color:var(--accent); text-decoration:none; font-size:13px; padding:4px 10px; border:1px solid var(--line); border-radius:6px; }
+  .links a:hover { background:var(--line); }
+  .meta { font-size:12px; color:var(--muted); font-family:ui-monospace,Consolas,monospace; }
+  footer { padding:16px 32px; color:var(--muted); font-size:12px; border-top:1px solid var(--line); }
+  .note { background:rgba(124,156,255,.08); border:1px solid rgba(124,156,255,.25); border-radius:8px; padding:10px 14px; font-size:13px; margin:0 32px 16px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>agent-lab · dashboard local</h1>
+    <p>Mapa de servicios y accesos. Estado refleja el momento de creación; para ver qué está corriendo ahora: <code>tools/doctor.ps1</code></p>
+  </div>
+</header>
+<div class="note">VoiceStudio y Ollama son servicios locales: la URL solo funciona si la app está abierta. El dashboard es estático.</div>
+<main>
+  <div class="card">
+    <h2>OpenCode <span class="status ok">web</span></h2>
+    <p>Agente de coding. TUI en terminal + web UI.</p>
+    <div class="meta">http://127.0.0.1:45278</div>
+    <div class="links">
+      <a href="http://127.0.0.1:45278" target="_blank">Abrir web UI</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Ollama <span class="status ok">api</span></h2>
+    <p>Modelos locales (qwen2.5-coder 7b/14b/3b/1.5b). Sin UI propia.</p>
+    <div class="meta">http://127.0.0.1:11434</div>
+    <div class="links">
+      <a href="http://127.0.0.1:11434/api/tags" target="_blank">Ver modelos</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>VoiceStudio <span class="status warn">desktop</span></h2>
+    <p>Clonación de voz, TTS, doblaje. Backend en puerto 3900 + MCP.</p>
+    <div class="meta">http://127.0.0.1:3900 (solo si la app está abierta)</div>
+    <div class="links">
+      <a href="http://127.0.0.1:3900/system/diagnose" target="_blank">Diagnóstico</a>
+      <a href="http://127.0.0.1:3900/mcp/" target="_blank">MCP endpoint</a>
+      <a href="http://127.0.0.1:3900/model/loaded" target="_blank">Modelos cargados</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Open WebUI <span class="status no">no instalado</span></h2>
+    <p>Chat tipo ChatGPT contra Ollama. Opcional.</p>
+    <div class="meta">http://localhost:3000 (si se instala)</div>
+    <div class="links">
+      <a href="https://docs.openwebui.com" target="_blank">Docs</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>LTX Desktop <span class="status no">no instalado</span></h2>
+    <p>Generación de video local. Requiere NVIDIA ≥15 GiB VRAM.</p>
+    <div class="meta">No-go con 6 GB de VRAM</div>
+    <div class="links">
+      <a href="https://github.com/Lightricks/LTX-Desktop" target="_blank">Repo</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Continue (VS Code) <span class="status warn">extensión</span></h2>
+    <p>Copilot local con Ollama (7B/3B/1.5B).</p>
+    <div class="meta">Config: local-ai/continue-config.yaml</div>
+    <div class="links">
+      <a href="local-ai/vscode-local.md">Guía</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Documentación del lab</h2>
+    <p>Metodología, acceso, planes, skills, fichas de videos.</p>
+    <div class="links">
+      <a href="docs/acceso.md">Acceso</a>
+      <a href="docs/metodologia.md">Metodología</a>
+      <a href="videos/INDEX.md">Videos</a>
+      <a href="skills/INDEX.md">Skills</a>
+      <a href="plans/INDEX.md">Planes</a>
+      <a href="local-ai/herramientas/INDEX.md">Herramientas</a>
+    </div>
+  </div>
+</main>
+<footer>agent-lab · dashboard local · generar con <code>tools/doctor.ps1</code> para estado real</footer>
+</body>
+</html>
