@@ -19,6 +19,8 @@ Objetivo: correr modelos en esta máquina para (a) no depender de la nube, (b) e
 
 Herramientas evaluadas (video, imagen, audio): `local-ai/herramientas/INDEX.md`.
 
+**Generar video con IA:** `local-ai/generar-video.md` — las 3 rutas (local gratis, API por segundo, GPU alquilada) con precios comparados.
+
 ## Decisión rápida
 
 | Querés... | Usá |
