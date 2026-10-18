@@ -64,6 +64,7 @@ agent-lab/
 - Toda afirmación técnica en una ficha lleva **timestamp** del video o link a la fuente original.
 - Lo que el video promete y no prueba va a la sección `## Humo / a verificar`.
 - Los skills se escriben en inglés o español, pero con `name` y `description` en el frontmatter siempre en inglés (mejor matching).
+- **Voz:** ninguna clonación sin leer `docs/consentimiento-voz.md`. Los clips de referencia viven fuera del repo.
 
 ## Empezar
 

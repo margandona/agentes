@@ -10,6 +10,8 @@ temp/
 *.webm
 *.mp3
 *.m4a
+*.wav
+voices/
 media/
 
 # Entornos
