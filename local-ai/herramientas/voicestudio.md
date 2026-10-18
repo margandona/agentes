@@ -118,12 +118,36 @@ Notas:
 
 **GO.** Es la primera herramienta de la pista local que corre en esta máquina sin comprar nada, y además se integra con agentes por MCP. El costo es $0 (solo luz) y el riesgo principal no es técnico: es el uso indebido de voces.
 
-## Costo
+## ¿Es gratis?
 
-- App: $0.
-- Luz: ~$0,03/h de GPU; en CPU, menos.
-- Disco: ~10 GB.
-- Tiempo: la primera configuración, ~30-45 min contando descargas.
+**Sí, para uso local no hay licencia ni cuota.** Pero "gratis" no significa "sin condiciones".
+
+| Concepto | Costo | Detalle |
+|---|---|---|
+| App VoiceStudio | **$0** | AGPL-3.0, sin cuenta, sin créditos, sin suscripción |
+| Motor por defecto (OmniVoice) | **$0** | Apache-2.0, permite uso comercial bajo sus condiciones |
+| Clonar y generar | **$0** | Todo en tu máquina, sin límite de caracteres |
+| Luz | ~$0,03/h | Solo cuando genera; un párrafo cuesta fracciones de centavo |
+| Disco | ~10 GB | Modelos + entorno |
+| Descargas | $0 | Internet, una sola vez (~2,3 GB el modelo base) |
+| Cuenta de Hugging Face | $0 | Solo si un modelo es *gated*; aceptar licencia |
+| Traducción de doblaje | **$0** | Con NLLB local. Si configurás un LLM en la nube, ahí pagás API |
+| Uso comercial | $0 | La app lo permite; **revisar la licencia de cada motor** antes de vender |
+| Distribuir una versión modificada | $0 | Pero AGPL obliga a publicar el código modificado |
+
+Lo que **no** hay: cuota mensual, créditos que se agotan, límite de palabras, marca de agua de pago, ni obligación de subir tu voz.
+
+Lo que sí puede costar plata, y es opcional:
+
+- Un proveedor LLM en la nube para traducir doblajes (hay alternativa local gratis).
+- Comprar o licenciar una voz de otra persona (permiso, contrato, actor de voz).
+- Una GPU mejor, solo si querés más velocidad o paralelismo.
+
+Comparación: VoiceStudio es **$0**. La generación de video por API de LTX cuesta **$0,03-0,13 por segundo**. Son economías distintas.
+
+## Tiempo
+
+La primera configuración: ~30-45 min contando descargas. Después, generación en tiempo real o más lento según el motor y el device.
 
 ## Cuándo revisar
 
