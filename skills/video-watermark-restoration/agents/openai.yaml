@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Watermark Restoration"
+  short_description: "Restauración visual de videos con máscaras"
+  default_prompt: "Usá $video-watermark-restoration para probar la restauración visual de este video autorizado."

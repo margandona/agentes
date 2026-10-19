@@ -2,6 +2,7 @@
 
 | Fecha | Slug | Título | Canal | Relevancia | Artefactos |
 |---|---|---|---|---|---|
+| 2026-10-15 | [s_xr--Zp5Fg-4-prompts-para-que-tu-cv-sobreviva-al-escaneo-de-6-segundos](s_xr--Zp5Fg-4-prompts-para-que-tu-cv-sobreviva-al-escaneo-de-6-segundos/ficha.md) | 4 Prompts Para Que Tu CV Sobreviva Al Escaneo De 6 Segundos | revolutia | 3 | skill resume-optimization-prompts |
 | 2026-10-17 | [a0uAGOPiQOU-como-usar-la-ia-en-una-organizacion-claude-claudecode-ia-pym](a0uAGOPiQOU-como-usar-la-ia-en-una-organizacion-claude-claudecode-ia-pym/ficha.md) | Cómo usar la IA en una organización | Lautaro Nievas | 3 | principio "conservar el valor" en metodologia |
 | 2026-07-24 | [IpnMvP6cKzE-app-a-la-store-sin-codigo](IpnMvP6cKzE-app-a-la-store-sin-codigo/ficha.md) | App a la Store, sin código | revolutia | 3 | nota frontend-tools (Expo) |
 | 2026-10-15 | [gvaBdZN44L0-como-armar-una-web-profesional-con-claude-code](gvaBdZN44L0-como-armar-una-web-profesional-con-claude-code/ficha.md) | Cómo armar una web profesional con Claude Code | Juan Cruz Bertorello | 3 | nota frontend-tools (UI UX Pro Max, 21st.dev) |

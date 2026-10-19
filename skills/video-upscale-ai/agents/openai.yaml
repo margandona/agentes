@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Upscale AI"
+  short_description: "Videos 1080p con IA y comparación Lanczos"
+  default_prompt: "Usá $video-upscale-ai para comparar este video de HeyGen y prepararlo para YouTube Shorts a 1080p."
