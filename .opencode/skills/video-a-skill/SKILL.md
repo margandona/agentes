@@ -19,6 +19,16 @@ Convierte un video de YouTube en artefactos verificables dentro de `agent-lab`.
 - El usuario pasa un link de YouTube y quiere aprender, replicar o extraer ideas.
 - Hay que decidir si un video merece un skill o un plan.
 
+## Atajo para videos cortos
+
+Si el video dura **≤180 s** (Shorts, Reels, TikTok), no sigas este procedimiento: usá la skill `shorts-to-skill` con `templates/ficha-short.md`. Antes de leer, podés correr:
+
+```powershell
+python tools/shorts_gate.py "<URL>"
+```
+
+Devuelve señales (CTA, cifras, pasos, fuentes, nombres dudosos) y un veredicto preliminar. Volvé a este procedimiento solo si el usuario pide el tratamiento de video largo.
+
 ## Procedimiento
 
 1. **Ingesta**
@@ -75,6 +85,7 @@ plans/<nombre>.md            (opcional)
 | Video muy largo | lectura incompleta | Procesar por capítulos y anotar qué falta |
 | Skill genérico | "usar buenas prácticas" | Reescribir con pasos verificables |
 | Duplicado | dos skills iguales | Buscar en `skills/INDEX.md` antes de crear |
+| Short tratado como video largo | ficha rellena, secciones vacías | Derivar a `shorts-to-skill` y `templates/ficha-short.md` |
 
 ## Origen
 

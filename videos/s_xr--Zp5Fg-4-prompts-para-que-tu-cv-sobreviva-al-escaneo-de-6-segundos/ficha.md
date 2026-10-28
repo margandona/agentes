@@ -11,6 +11,10 @@
 
 ## Tesis en una frase
 
+Revisión del 19-10-2026: transcripción completa y 32 fotogramas separados dos segundos mediante agent-reach/yt-dlp; sin escucha directa ni reproducción continua. Las muestras muestran al presentador con subtítulos, sin ejecución real de ATS. Los tiempos finos anteriores son aproximados: la transcripción disponible marca bloques [00:00], [00:30] y [01:02]. Las afirmaciones del video sobre entrevistas y motivos de rechazo no están comprobadas.
+
+Artefacto adaptado: [resume-optimization-prompts](../../skills/resume-optimization-prompts/SKILL.md). La adaptación conserva el flujo, exige evidencia y sustituye promesas de ATS por una matriz de requisitos.
+
 > Con cuatro prompts encadenados en un mismo chat, la IA diagnostica por qué te descartan, reescribe tu experiencia con resultados, te da un score ATS y reescribe el CV desde la perspectiva de la pérdida.
 
 ## Qué enseña

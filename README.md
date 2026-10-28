@@ -19,6 +19,17 @@ Regla para decidir:
 
 Un repo y no dos porque comparten la misma ingesta (transcripción + ficha) y los mismos índices. Se separa recién si la pista de IA local crece al punto de tener su propio pipeline. Decisión registrada en `docs/decisiones.md`.
 
+## Cuatro puertas de entrada
+
+| Traés… | Sale… | Pedido típico |
+|---|---|---|
+| Un link de video | Ficha verificada + skill y/o plan | “Procesá este video: \<url\>” |
+| Un video o una foto | Archivo limpio, más grande o sin marca | “Limpiá este MP4 y subilo a 1080” |
+| Una idea o una app | Documentos, recon, plan, hipótesis | “Quiero clonar esta app y mejorarla” |
+| Una pregunta o un dato | Respuesta con fuente | “¿MiroFish sirve para probar un lanzamiento?” |
+
+Atajo recomendado para videos: `/video <url>`. Hace ingesta, gate, ficha y propuesta; se detiene a esperar aprobación antes de crear un skill.
+
 ## Estructura
 
 ```
@@ -30,9 +41,10 @@ agent-lab/
 ├─ agents/           Definiciones de agentes (prompt, tools, permisos)
 ├─ prompts/          Prompts sueltos, versionados
 ├─ templates/        Plantillas: ficha de video, skill, plan, agente
-├─ tools/            Scripts: bajar transcripciones, doctor del entorno
-├─ docs/             Metodología, stack, decisiones
-└─ .opencode/skills/ Skills locales de este repo (ej: video-a-skill)
+├─ tools/            Scripts: ingesta, gate de videos, borrador, doctor del entorno
+├─ docs/             Metodología, stack, decisiones, mapa de herramientas
+├─ .opencode/skills/ Skills locales de este repo (ej: video-a-skill)
+└─ .opencode/commands/ Comandos como /video
 ```
 
 ## Flujo de trabajo
@@ -54,8 +66,20 @@ agent-lab/
 
 ## Skills ya instaladas
 
-- `agent-reach` (global, `~/.config/opencode/skills/agent-reach`): busca y lee en YouTube, X, Reddit, GitHub, Bilibili, RSS, web en general.
-- `video-a-skill` (local, `.opencode/skills/`): orquesta el pipeline de este repo.
+Hay 12 skills en uso: 11 canónicas en `skills/` (espejadas en `.opencode/skills/` y `.agents/skills/`) y `video-a-skill`, que vive solo en `.opencode/skills/`.
+
+| Familia | Skills |
+|---|---|
+| Videos → conocimiento | `video-a-skill`, `shorts-to-skill` |
+| Archivos de video/foto | `video-upscale-ai`, `video-watermark-restoration`, `media-metadata-sanitizer` |
+| Apps y productos | `six-docs-before-build`, `app-replica-recon`, `app-gap-analysis`, `synthetic-audience-test` |
+| Agentes | `agent-with-memory-and-tools`, `agent-stack-audit` |
+| Personas | `resume-optimization-prompts` |
+
+Además: `agent-reach` (global) para buscar y leer en internet, el comando `/video` para procesar un video de punta a punta, y el MCP `image-lab` para íconos e imágenes.
+
+Mapa completo, con cuándo usar cada una: [`docs/herramientas-y-skills.md`](docs/herramientas-y-skills.md).
+Versión explicada fácil: [`docs/guia-facil.pdf`](docs/guia-facil.pdf) (puede no incluir las skills más nuevas).
 
 ## Convenciones
 
@@ -87,5 +111,7 @@ Mapa completo de servicios y puertos: `docs/acceso.md`.
 - [x] Skill `agent-reach` instalada + yt-dlp
 - [x] Ollama instalado (falta benchmark)
 - [x] Primer video procesado (LTX Desktop, no-go por VRAM)
-- [ ] Primer skill propio
+- [x] MCP `image-lab`: íconos offline; imágenes con IA a la espera de una clave
+- [x] 12 skills propias documentadas y espejadas
+- [x] Pipeline de video corto (`shorts_gate`, `draft_pack`) y comando `/video`
 - [ ] Primer agente corriendo

@@ -30,3 +30,17 @@ Formato: fecha, decisión, motivo, alternativa descartada.
 **Alternativa descartada:** `qwen2.5-coder:14b` (9 GB, corre en RAM) y autocompletado con el 7B (~2,5 s por sugerencia).
 **Costo:** 0. El único gasto es el disco (~11 GB de modelos).
 **Revisar cuando:** se prueben las 5 tareas de calidad, o si el swap 7B ↔ 1.5B resulta molesto en el uso diario (en ese caso el 3B pasa a ser el default de chat).
+
+## 2026-10-27 — No adoptar en bloque los "5 plugins" del Short hVlnCKQXYkk
+
+**Decisión:** no instalar OmniRoute, Claude-Mem, Headroom, Claude Code Setup y Task Observer como pack. Se adopta la práctica de auditar el stack (`agent-stack-audit`) y cada herramienta se evalúa por separado cuando exista un problema medible.
+**Motivo:** solo dos son plugins (Claude-Mem y Claude Code Setup); OmniRoute es gateway, Headroom es CLI/proxy y Task Observer es una skill. "1.600 millones de tokens gratis" es un techo teórico, no un saldo. OmniRoute pide secretos propios y su predecesor tuvo una vulnerabilidad crítica de autenticación. Claude-Mem captura actividad y tiene planes pagos. Headroom ahorra menos en código que en logs.
+**Alternativa descartada:** instalar los cinco de golpe.
+**Revisar cuando:** haya dolor concreto (cuota agotada, contexto saturado, correcciones repetidas) y la herramienta pase el checklist de terceros de `agent-stack-audit`.
+
+## 2026-10-27 — MiroFish no se instala; se adopta el método
+
+**Decisión:** no instalar MiroFish. El ensayo de lanzamiento se hace con `synthetic-audience-test` usando subagentes aislados.
+**Motivo:** no es "gratis dentro de Claude": es una app self-hosted (Node 18+, Python 3.11–3.12, `uv`) que requiere `LLM_API_KEY` y `ZEP_API_KEY`, con licencia AGPL-3.0 y recomendación de <40 rondas por costo. Además, colapso de persona y gregarismo hacen que sobreestime el entusiasmo. Para probar un copy, 8–12 personas aisladas dan la misma señal sin dos runtimes ni dos claves.
+**Alternativa descartada:** instalar MiroFish para testear landings.
+**Revisar cuando:** la dinámica social emergente sea el objeto de estudio (cascadas, polarización, difusión) o se necesiten miles de agentes con memoria persistente.

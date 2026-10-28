@@ -68,3 +68,15 @@ Procesamiento completo en bloques de 48 cuadros: 511,5 segundos incluida la expo
 Revisión visual de tres fotogramas del MP4 final a 1, 13 y 24 s: las ocho marcas no se leen; permanece suavizado local propio de la reconstrucción. Artefactos: `tmp/vale/video-vale-limpio.mp4`, `tmp/vale/verificacion-final.json`, inspecciones original/final, máscara y muestra. El contenido del video no se interpretó como instrucciones.
 
 Esta entrada reveló un falso positivo C2PA en una muestra H.264 comprimida. La corrección y sus pruebas se documentan en `plans/media-metadata-sanitizer.md`; no se retiró una credencial real ni se desactivó globalmente su detección.
+
+### Corrección de compatibilidad — 19-10-2026
+
+El usuario informó que los dos MP4 no abrían en reproductores, aunque YouTube los aceptaba. FFprobe mostró H.264 High 4:4:4 Predictive/yuv444p en ambos: el codificador había elegido el formato a partir de PNG RGB. Se fijan y validan H.264 High/yuv420p en restore.py. Se producen copias con sufijo -compatible, CRF 18 y faststart, manteniendo resolución, FPS, cuadros y audio AAC sin recodificar; se sanea al final. El original restaurado se conserva. Informe tmp/video-studio/compatibilidad.json: incluye decodificación completa, timestamps y hash de audio/original. La compatibilidad efectiva con el reproductor del usuario requiere que abra la copia; no se certifica desde FFprobe.
+
+### Jesús Cornejo / Knitwork — 19-10-2026
+
+Solicitud directa: limpiar metadatos, restaurar marcas y reducir espacio lateral del archivo de Downloads. Se inspeccionaron seis muestras espaciadas seis segundos y un fotograma completo. Original: 1280×720, 934 cuadros, 25 FPS, 37,38 s, AAC estéreo 48 kHz. Se conserva copia original y SHA-256 en tmp/jesus-knitwork. Saneamiento inicial antes de editar: aprobado, sin bloqueo por procedencia detectada.
+
+Recorte 576×720 (4:5), x=336/y=0: se eligió para conservar cabeza y brazos en las muestras; 9:16 cortaría considerablemente los brazos. Máscara de cuatro logos HeyGen basada en la plantilla existente, inspeccionada sobre el nuevo encuadre. Muestra ProPainter de 25 cuadros a 384×480: útil con suavizado local de camisa y fondo. Ejecución completa en bloques de 48 cuadros: 824,875 s. Metadatos saneados de nuevo tras exportar.
+
+Salida: tmp/jesus-knitwork/jesus-cornejo-vertical-limpio.mp4, H.264 High/yuv420p, 576×720, 25 FPS, 934 cuadros, 37,38 s. Verificados audio decodificado idéntico al original, timestamps conservados, SHA-256 de entrada intacto y decodificación completa. Revisados fotogramas codificados a 1, 18 y 35 s: marcas no legibles, suavizado local visible; no se certifica reproducción continua ni perfección temporal. Informe: tmp/jesus-knitwork/verificacion-final.json. No se modifica videos/INDEX.md porque se trata de edición de un archivo personal, no de extracción de una ficha de aprendizaje.

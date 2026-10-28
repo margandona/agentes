@@ -1,0 +1,4 @@
+interface:
+  display_name: "Media Metadata Sanitizer"
+  short_description: "Inspección y limpieza selectiva de metadatos"
+  default_prompt: "Usá $media-metadata-sanitizer para inspeccionar y minimizar los metadatos de este archivo autorizado."

@@ -95,13 +95,16 @@ def restore(args):
     candidate=work/'candidate.mp4'
     cmd=[args.ffmpeg,'-v','error','-n','-copyts','-itsoffset',video.get('start_time','0'),
          '-framerate',fps,'-i',restored/'%06d.png','-i',source,
-         '-map','0:v:0','-map','1:a?','-c:v','libx264','-preset','fast','-crf','18','-c:a','copy']
+         '-map','0:v:0','-map','1:a?','-c:v','libx264','-preset','fast','-crf','18',
+         '-pix_fmt','yuv420p','-profile:v','high','-c:a','copy']
     if args.limit_frames:
         cmd+=['-t',str(len(frames)/fps_float+float(video.get('start_time','0')))]
     run([*cmd,'-movflags','+faststart',candidate])
     run([args.ffmpeg,'-v','error','-xerror','-i',candidate,'-f','null','-'])
     after=json.loads(run([args.ffprobe,'-v','error','-show_streams','-show_format','-of','json',candidate]))
     outvideo=next(s for s in after['streams'] if s['codec_type']=='video')
+    if outvideo.get('codec_name')!='h264' or outvideo.get('pix_fmt')!='yuv420p':
+        raise RuntimeError('La salida debe ser H.264 yuv420p para reproducción compatible')
     if int(outvideo.get('nb_frames',-1))!=len(frames) or (outvideo['width'],outvideo['height'])!=size:
         raise RuntimeError('La verificación de resolución/cuadros falló')
     if not args.limit_frames:

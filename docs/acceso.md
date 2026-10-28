@@ -67,6 +67,16 @@ Para que OpenCode use VoiceStudio (voz clonada, TTS, transcripción), agregar en
 
 Requiere que VoiceStudio esté abierto. Las tools disponibles: `generate_speech`, `clone_voice`, `transcribe`, `list_voices`, `check_health`.
 
+### image-lab (MCP local, sin puerto)
+
+Servidor **stdio** para generar íconos e imágenes. No abre puerto: OpenCode lo arranca con `uv` cuando inicia la sesión.
+
+- `generate_icon`: íconos PNG deterministas, sin internet.
+- `generate_image`: imágenes con IA; requiere `OPENAI_API_KEY` o `GEMINI_API_KEY`.
+- `list_providers`: claves configuradas y estilos disponibles.
+
+Configurado en `~/.config/opencode/opencode.jsonc`. Verificar con `opencode mcp list`. Detalle: [`tools/mcp-image/README.md`](../tools/mcp-image/README.md).
+
 ## Dashboard local
 
 Un panel visual con links a todo: `local-ai/dashboard.html`. Abrilo en el navegador (doble click) y tenés los accesos en un solo lugar.

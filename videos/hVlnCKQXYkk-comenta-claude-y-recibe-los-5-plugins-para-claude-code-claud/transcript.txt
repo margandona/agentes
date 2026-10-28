@@ -1,0 +1,5 @@
+[00:00] No uses Cloud Code sin antes instalarte estos cinco plugins. El primero es Omnirout, que te da un uso prácticamente ilimitado conectando Cloud Code a más de 200 proveedores de API para usar gratis. Así, en cuanto llegas al límite de uso, te cambia automáticamente al mejor modelo y te da hasta 1,600 millones de tokens gratis todos los meses. El segundo es Cloud Mem, le da memoria a Cloud en todas sus sesiones. Así, empieza a acordarse de tus proyectos y archivos y nunca más tienes que volver a explicarle nada. El tercero es Jet Room,
+
+[00:33] se pone entre tú y el modelo y solamente deja pasar lo que realmente importa, comprimiendo y eliminando todo lo demás. Mismo resultado con muchísimos menos tokens. El cuarto es Cloud Setup, el plugin oficial de Anthropic, que escanea toda tu base de código y te recomienda los mejores Yuks, Skills, subagentes y hasta servidores MCP para tu proyecto y elimina toda la basura y el ruido. Y por último, Task Observer. Observa cómo trabajas, aprende tu estilo y va mejorando tus Skills por sí solo de forma totalmente automática. Si lo
+
+[01:03] quieres probar, comenta CLOD aquí abajo y te mando el paso a paso completo.

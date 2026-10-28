@@ -142,20 +142,21 @@ def pick_subtitle(directory: Path, video_id: str, langs: list[str]) -> Path | No
     return sorted(candidates, key=score)[0]
 
 
-def download(url: str, langs: list[str], slug_override: str | None) -> int:
+def download(url: str, langs: list[str], slug_override: str | None) -> tuple[int, Path | None]:
+    """Devuelve (código, carpeta). Código: 0 ok, 1 error, 2 sin subtítulos útiles."""
     probe_opts = {"quiet": True, "no_warnings": True, "skip_download": True, "extractor_args": {"youtube": {"player_client": ["android", "web"]}}}
     try:
         with yt_dlp.YoutubeDL(probe_opts) as ydl:
             info = ydl.extract_info(url, download=False)
     except Exception as exc:  # noqa: BLE001
         print(f"[error] No pude leer el video: {exc}", file=sys.stderr)
-        return 1
+        return 1, None
 
     if info.get("_type") == "playlist":
         entries = [e for e in info.get("entries") or [] if e]
         if not entries:
             print("[error] La playlist está vacía.", file=sys.stderr)
-            return 1
+            return 1, None
         info = entries[0]
 
     video_id = info.get("id") or "video"
@@ -209,12 +210,12 @@ def download(url: str, langs: list[str], slug_override: str | None) -> int:
             "o transcribí con whisper local.",
             file=sys.stderr,
         )
-        return 2
+        return 2, directory
 
     text = cues_to_text(parse_vtt(subtitle))
     if not text.strip():
         print(f"[warn] El subtítulo {subtitle.name} quedó vacío.", file=sys.stderr)
-        return 2
+        return 2, directory
 
     (directory / "transcript.txt").write_text(text, encoding="utf-8")
     words = len(text.split())
@@ -222,7 +223,7 @@ def download(url: str, langs: list[str], slug_override: str | None) -> int:
     print(f"     metadata:   {directory / 'metadata.json'}")
     print(f"     transcripción: {directory / 'transcript.txt'} ({words} palabras)")
     print(f"     idioma:     {subtitle.name}")
-    return 0
+    return 0, directory
 
 
 def main() -> int:
@@ -236,7 +237,8 @@ def main() -> int:
     args = parser.parse_args()
 
     langs = [x.strip() for x in args.langs.split(",") if x.strip()]
-    return download(args.url, langs, args.slug)
+    code, _ = download(args.url, langs, args.slug)
+    return code
 
 
 if __name__ == "__main__":
